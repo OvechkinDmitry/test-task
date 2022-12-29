@@ -1,0 +1,81 @@
+html,
+body {
+        height: 100%;
+        width: 100%;
+        font-size: 100%;
+        line-height: 1;
+        font-size: 14px;
+        -ms-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+}
+
+input,
+button,
+textarea {
+        font-family: inherit;
+        outline: none;
+}
+
+input::-ms-clear {
+        display: none;
+}
+
+button {
+        outline: none;
+        border: none;
+        cursor: pointer;
+}
+input{
+    outline: none;
+    border: none;
+}
+button::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+}
+
+a,
+a:visited {
+        text-decoration: none;
+}
+
+a:hover {
+        text-decoration: none;
+}
+
+ul li {
+        list-style: none;
+}
+
+img {
+        vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+        font-size: inherit;
+        font-weight: inherit;
+}
+
+a.text:active,
+a.text:hover,
+a:visited,
+a.text {
+        text-decoration: none;
+        color: inherit;
+}
+
+:root {
+        --body-color: #FDFDFD;
+        --link-acrion-color: #FF9900;
+}
+
+body {
+        font-family: 'Montserrat', sans-serif;
+        background: var(--body-color);
+}
