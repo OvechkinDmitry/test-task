@@ -43,24 +43,39 @@ body{
     display: flex;
     flex-direction: column;
     align-self: stretch;
-    margin-bottom: 40px;
+    
 }
 
-.username{
+.login-form__input-group{
+    display: flex;
+    flex-direction: column;
+}
+.login-form__input-group:first-child{
     margin-bottom: 30px;
 }
+.input-error{
+    border-color: rgba(255, 0, 0, 0.401);
+}
+.login-form__username{
 
-.login-button{
+}
+.login-form__error-message{
+    margin-top: 5px;
+    font-size: 18px;
+    color: red;
+}
+.login-form__login-button{
     align-self: stretch;
     padding: 10px 0;
     border-radius: 3px;
     background: #2e62d9;
     color: white;
-    transition: .3s all ease-in-out;
+    transition: .2s all ease-in-out;
+    margin-top: 40px;
 }
-.login-button:hover{
+.login-form__login-button:hover{
     background: #2ca2fd;
     -webkit-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
--moz-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
+    box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
 }

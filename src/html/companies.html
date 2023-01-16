@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../scss/null.css">
+    <link rel="stylesheet" href="../scss/companies.css">
+    <title>Document</title>
+</head>
+<body onload="addCompanies()">
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__container _container">
+                <div class="header__logo">Companies Searcher</div>
+            </div>
+        </header>
+        <div class="page">
+            <div class="page__container _container">
+                <div class="page__filter filter">
+                        <input type="text" placeholder="company name" id="name">
+                        <input type="text" placeholder="company type" id="type">
+                        <input type="text" placeholder="company indystry" id="indystry">
+                </div>
+                <div class="page__cards cards">
+                </div>
+                <div class="page__loader-container">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/companies.js" defer></script>
+</body>
+</html>
