@@ -50,7 +50,6 @@ class Login {
       field.classList.add("input-error");
       return false;
     }
-
     if (status === "success") {
       if (errorMessage) errorMessage.innerText = "";
       field.classList.remove("input-error");
