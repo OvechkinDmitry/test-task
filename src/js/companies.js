@@ -35,32 +35,33 @@ class CompaniesPage {
   }
 
   addCompanies = async (size = 10) => {
-    let companiesArr = await fetch(`https://random-data-api.com/api/company/random_company?size=${size}`);
-    if (companiesArr.ok) {
-      companiesArr = await companiesArr.json();
-      companiesArr.map((data) => {this.companyCards.push(new CompanyCard(data))});
-      // this.companyCards.map((card) => (this.html += card.render()));
-    }
-    this.render()
-    console.log(this.companyCards.length)
+    fetch(`https://random-data-api.com/api/company/random_company?size=${size}`).then(res =>res.json())
+        .then(companiesArr => {
+            console.log(companiesArr)
+            companiesArr.map((data) => {this.companyCards.push(new CompanyCard(data))});
+            this.companyCards.map((card) => (this.html += card.render()));
+            this.render(this.companyCards)
+    })
   };
 
-  sortCompanies = () => {
-    let filterName = this.inputName.value.toLowerCase();
-    let filterType = this.inputType.value.toLowerCase();
-    let filterIndystry = this.inputIndustry.value.toLowerCase();
-    let cards = this.container.querySelectorAll(".cards__card");
+  sortCompanies = (e) => {
+    let filterName = this.inputName.value.toLowerCase().trim();
+    let filterType = this.inputType.value.toLowerCase().trim();
+    let filterIndystry = this.inputIndustry.value.toLowerCase().trim();
     const checkField = (param1, param2) => !param2.trim() || param1 === param2;
-    cards.forEach((card) => {
-      let comName = card.querySelector(".card__title").innerText.toLowerCase();
-      let comType = card.querySelector(".card__type").innerText.split(": ")[1].toLowerCase();
-      let comIndystry = card.querySelector(".card__industry").innerText.split(": ")[1].toLowerCase();
-      if (!checkField(comName, filterName) || !checkField(comType, filterType) || !checkField(comIndystry, filterIndystry)) {
-        if (!card.classList.contains("hidden")) card.classList.add("hidden");
-      } else {
-        if (card.classList.contains("hidden")) card.classList.remove("hidden");
+    let cards = []
+    for (let card of this.companyCards){
+      if (card) {
+        let comName = card.name.toLowerCase()
+        let comType = card.type.toLowerCase()
+        let comIndystry = card.industry.toLowerCase()
+        if (!checkField(comName, filterName) || !checkField(comType, filterType) || !checkField(comIndystry, filterIndystry))
+          continue
+        else
+          cards.push(card)
       }
-    });
+    }
+    this.render(cards)
   };
 
   makePagination() {
@@ -74,12 +75,11 @@ class CompaniesPage {
     );
   }
 
-  render(){
-    this.container.innerHTML = this.companyCards.reduce((html, card) => {
-
-      return html + card.render()
-    }, "")
-    // this.container.innerHTML = this.html
+  render(cards = []){
+    if (cards)
+      this.container.innerHTML = cards.reduce((html, card) => {
+        return html + card.render()
+      }, "")
   }
 }
 
@@ -93,4 +93,3 @@ let companiesPage = new CompaniesPage(cardsRoot, [inputName, inputType, inputInd
 inputName.addEventListener('input', companiesPage.sortCompanies)
 inputType.addEventListener('input', companiesPage.sortCompanies)
 inputIndystry.addEventListener('input', companiesPage.sortCompanies)
-// companiesPage.render()
