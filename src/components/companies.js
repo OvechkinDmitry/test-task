@@ -56,17 +56,25 @@ class CompanyCard{
 
 
 class CompaniesPage {
-  constructor(container, inputs) {
+  constructor(container) {
     this.container = container
-    this.inputName = inputs[0]
-    this.inputType = inputs[1]
-    this.inputIndustry = inputs[2]
-    // this.html = "";
+    this.container.innerHTML = this.getPageTemplate()
     this.companyCards = []
+    this.handleInputs()
     this.addCompanies()
     this.makePagination()
-    this.sortCompanies()
   }
+
+  handleInputs = () => {
+      let inputs = []
+      for (let id of ['name', 'type', 'indystry']) {
+        let inp = document.querySelector(`#${id}`);
+        inp.oninput = () => this.sortCompanies()
+        inputs.push(inp)
+      }
+      this.inputs = inputs
+  }
+
 
   handleClick = () => {
     document.querySelectorAll('.card').forEach(card => {
@@ -75,6 +83,7 @@ class CompaniesPage {
         this.container.innerHTML = new DetailedInfo(company).render()
         window.scrollTo(0,0)
         document.querySelector('.go__back').addEventListener('click', () =>{
+          this.container.innerHTML = this.getPageTemplate(this.companyCards.reduce((html, card) => {return html + card.render()}, ""))
           this.renderCards(this.companyCards)
         })
       })
@@ -85,15 +94,14 @@ class CompaniesPage {
     fetch(`https://random-data-api.com/api/company/random_company?size=${size}`).then(res =>res.json())
         .then(companiesArr => {
             companiesArr.map((data) => {this.companyCards.push(new CompanyCard(data))});
-            // this.companyCards.map((card) => (this.html += card.render()));
             this.renderCards(this.companyCards)
     })
   };
 
   sortCompanies = (e) => {
-    let filterName = this.inputName.value.toLowerCase().trim();
-    let filterType = this.inputType.value.toLowerCase().trim();
-    let filterIndystry = this.inputIndustry.value.toLowerCase().trim();
+    let filterName = this.inputs[0].value.toLowerCase().trim();
+    let filterType = this.inputs[1].value.toLowerCase().trim();
+    let filterIndystry = this.inputs[2].value.toLowerCase().trim();
     const checkField = (param1, param2) => !param2.trim() || param1 === param2;
     let cards = []
     for (let card of this.companyCards){
@@ -103,8 +111,9 @@ class CompaniesPage {
         let comIndystry = card.industry.toLowerCase()
         if (!checkField(comName, filterName) || !checkField(comType, filterType) || !checkField(comIndystry, filterIndystry))
           continue
-        else
+        else{
           cards.push(card)
+        }
       }
     }
     this.renderCards(cards)
@@ -120,22 +129,26 @@ class CompaniesPage {
         { passive: true }
       );
   }
-  getPageTemplate = () => {
-
+  getPageTemplate = (cards = '') => {
+      return `<div class="page__filter filter">
+                        <input type="text" placeholder="company name" id="name">
+                        <input type="text" placeholder="company type" id="type">
+                        <input type="text" placeholder="company indystry" id="indystry">
+                </div>
+                <div class="page__cards cards">
+                    ${cards}
+                </div>
+                <div class="page__loader-container">
+                    <div class="loader"></div>
+                </div>`
   }
   renderCards(cards = []){
-    if (cards)
-      this.container.innerHTML = cards.reduce((html, card) => {return html + card.render()}, "")
+    let cardsContainer = document.querySelector('.cards')
+    cardsContainer.innerHTML = cards.reduce((html, card) => {return html + card.render()}, "")
     this.handleClick()
+    this.handleInputs()
   }
 }
-
-
-
-
-
-
-
 
 let exit = document.querySelector('#exit')
 exit.addEventListener('click', () =>{
@@ -144,20 +157,8 @@ exit.addEventListener('click', () =>{
 })
 
 
-let cardsRoot = document.querySelector(".page__cards");
-let inputName = document.querySelector("#name");
-let inputType = document.querySelector("#type");
-let inputIndystry = document.querySelector("#indystry");
-
-
-let companiesPage = new CompaniesPage(cardsRoot, [inputName, inputType, inputIndystry,]);
-document.querySelectorAll('.card').forEach(card => {
-  card.addEventListener('click', () => console.log(card.innerHTML))
-})
-inputName.addEventListener('input', companiesPage.sortCompanies)
-inputType.addEventListener('input', companiesPage.sortCompanies)
-inputIndystry.addEventListener('input', companiesPage.sortCompanies)
-
+let cardsRoot = document.querySelector(".page__container");
+let companiesPage = new CompaniesPage(cardsRoot);
 
 
 
