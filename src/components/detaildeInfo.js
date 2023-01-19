@@ -1,21 +1,9 @@
-// function init(){
-//     let map = new yamaps.Map('map', {
-//         center:[59.999,30.222],
-//         zoom: 16,
-//     })
-// }
-
-
 class DetailedInfo{
     constructor(company, container) {
         this.company = company
         this.container = container
         this.container.innerHTML = this.render()
-        // this.showMap()
     }
-    // showMap = () => {
-    //     yamaps.ready(init);
-    // }
     render(){
         return `<div class="page__detailed detailed">
                         <div class="go__back"><i class='bx bx-arrow-back'></i></div>
@@ -39,14 +27,5 @@ class DetailedInfo{
                     </div>`
     }
 }
-
-// function init(){
-//     let map = new window.yamaps.Map('map', {
-//         center:[59.999,30.222],
-//         zoom: 16,
-//     })
-// }
-// if (document.querySelector('#map'))
-// yamaps.ready(init);
 
 export default DetailedInfo
