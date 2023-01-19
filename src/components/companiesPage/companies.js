@@ -1,7 +1,7 @@
-import DetailedInfo from './detaildeInfo.js'
-import CompanyCard from "./companyCard.js";
-import {getPageTemplate} from "./templates.js";
-import {makePagination} from "./makePagination.js";
+import DetailedInfo from '../detailedInfo/detaildeInfo.js'
+import CompanyCard from "../companyCard/companyCard.js";
+import {getPageTemplate} from "./template.js";
+import {makePagination} from "../pagination/makePagination.js";
 
 
 class CompaniesPage {
@@ -75,11 +75,11 @@ class CompaniesPage {
 let exit = document.querySelector('#exit')
 exit.addEventListener('click', () =>{
   localStorage.removeItem('user')
-  window.location.pathname = "/src/templates/login.html"
+  window.location.pathname = "../../templates/login.html"
 })
 
 if(!localStorage.getItem('user'))
-  window.location.pathname = "/src/templates/login.html"
+  window.location.pathname = "../../templates/login.html"
 
 let cardsRoot = document.querySelector(".page__container");
 let companiesPage = new CompaniesPage(cardsRoot);
