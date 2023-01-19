@@ -139,7 +139,7 @@ input::placeholder{
 
 
 .page__loader-container{
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     margin: 20px 0;
@@ -191,10 +191,10 @@ input::placeholder{
     border-radius: 10px;
     gap: 20px;
 }
-.detailde__map{
+.map{
     width: 100%;
 }
-.detailde__map img{
+.map img{
     opacity: 0.9;
     width: 100%;
 }
@@ -210,7 +210,6 @@ input::placeholder{
 }
 .detailed__title{
     width: 100%;
-    background:rgba(0,0,0,0.0999);
     padding: 20px;
     flex-direction: column;
     border-radius: 10px;
@@ -262,7 +261,6 @@ input::placeholder{
 .detailed__data span{
     display: inline-block;
     color: #fff;
-    background:rgba(0,0,0,0.0999);
     padding: 15px 15px;
     text-align: center;
     margin-right: 5px;

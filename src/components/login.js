@@ -64,4 +64,3 @@ if (form) {
   const fields = ["username", "password"];
   const validator = new Login(form, fields);
 }
-// window.location.href = "login";
