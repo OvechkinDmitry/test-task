@@ -256,7 +256,7 @@ input::placeholder{
     margin:auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 }
 .detailed__data span{
     display: inline-block;
