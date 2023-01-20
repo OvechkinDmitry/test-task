@@ -28,16 +28,17 @@ class CompaniesPage {
 
   handleClick = () => {
     document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('click', ()=> {
+      card.onclick= () => {
         let [company] = this.companyCards.filter((el) => el.uid === card.id )
-        new DetailedInfo(company,this.container)
+        let detailedPage = new DetailedInfo(company,this.container)
+        detailedPage.init()
         window.scrollTo(0,0)
-        document.querySelector('.go__back').onclick = () =>{
-          this.container.innerHTML = getPageTemplate(this.companyCards.reduce((html, card) =>
-          {return html + card.render()}, ""))
+        detailedPage.goBackBtn.onclick = () =>{
+          this.container.innerHTML = getPageTemplate(
+              this.companyCards.reduce((html, card) => html + card.render(), ""))
           this.renderCards(this.companyCards)
         }
-      })
+      }
     })
   }
 
@@ -49,7 +50,7 @@ class CompaniesPage {
             companiesArr.map((data) => {this.companyCards.push(new CompanyCard(data))});
             this.renderCards(this.companyCards)
             loader.style.display = 'none'
-    })
+    }).catch(err => console.log(err))
   };
 
   sortCompanies = (e) => {
