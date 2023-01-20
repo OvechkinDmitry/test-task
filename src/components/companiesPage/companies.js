@@ -7,8 +7,11 @@ import {makePagination} from "../pagination/makePagination.js";
 class CompaniesPage {
   constructor(container) {
     this.container = container
-    this.container.innerHTML = getPageTemplate()
     this.companyCards = []
+  }
+
+  init = () => {
+    this.container.innerHTML = getPageTemplate()
     this.handleInputs()
     this.addCompanies()
     makePagination(this.addCompanies)
@@ -30,7 +33,8 @@ class CompaniesPage {
         new DetailedInfo(company,this.container)
         window.scrollTo(0,0)
         document.querySelector('.go__back').onclick = () =>{
-          this.container.innerHTML = getPageTemplate(this.companyCards.reduce((html, card) => {return html + card.render()}, ""))
+          this.container.innerHTML = getPageTemplate(this.companyCards.reduce((html, card) =>
+          {return html + card.render()}, ""))
           this.renderCards(this.companyCards)
         }
       })
@@ -72,17 +76,19 @@ class CompaniesPage {
   }
 }
 
-let exit = document.querySelector('#exit')
-exit.addEventListener('click', () =>{
-  localStorage.removeItem('user')
-  window.location.pathname = "../../templates/login.html"
-})
+export default CompaniesPage
 
-if(!localStorage.getItem('user'))
-  window.location.pathname = "../../templates/login.html"
-
-let cardsRoot = document.querySelector(".page__container");
-let companiesPage = new CompaniesPage(cardsRoot);
+// let exit = document.querySelector('#exit')
+// exit.addEventListener('click', () =>{
+//   localStorage.removeItem('user')
+//   window.location.pathname = "../../templates/login.html"
+// })
+//
+// if(!localStorage.getItem('user'))
+//   window.location.pathname = "../../templates/login.html"
+//
+// let cardsRoot = document.querySelector(".page__container");
+// let companiesPage = new CompaniesPage(cardsRoot);
 
 
 
