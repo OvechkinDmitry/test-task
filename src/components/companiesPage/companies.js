@@ -50,7 +50,7 @@ class CompaniesPage {
             companiesArr.map((data) => {this.companyCards.push(new CompanyCard(data))});
             this.renderCards(this.companyCards)
             loader.style.display = 'none'
-    }).catch(err => console.log(err))
+        }).catch(err => console.log(err))
   };
 
   sortCompanies = (e) => {
@@ -58,8 +58,7 @@ class CompaniesPage {
     let filterType = this.inputs[1].value.toLowerCase().trim();
     let filterIndystry = this.inputs[2].value.toLowerCase().trim();
     const checkField = (param1, param2) => !param2.trim() || param1 === param2;
-    this.renderCards(
-        this.companyCards.filter((card) => {
+    this.renderCards(this.companyCards.filter((card) => {
           let comName = card.name.toLowerCase()
           let comType = card.type.toLowerCase()
           let comIndystry = card.industry.toLowerCase()
@@ -76,20 +75,7 @@ class CompaniesPage {
     this.handleInputs()
   }
 }
-
 export default CompaniesPage
-
-// let exit = document.querySelector('#exit')
-// exit.addEventListener('click', () =>{
-//   localStorage.removeItem('user')
-//   window.location.pathname = "../../templates/login.html"
-// })
-//
-// if(!localStorage.getItem('user'))
-//   window.location.pathname = "../../templates/login.html"
-//
-// let cardsRoot = document.querySelector(".page__container");
-// let companiesPage = new CompaniesPage(cardsRoot);
 
 
 

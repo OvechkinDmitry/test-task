@@ -15,5 +15,15 @@ class App{
         new CompaniesPage(pageContainer).init()
     }
 }
+let app = new App("Companies Searcher")
+app.render()
 
-new App("Companies Searcher").render()
+
+if(!localStorage.getItem('user'))
+  window.location.pathname = "../../templates/login.html"
+
+let exit = document.querySelector('#exit')
+exit.addEventListener('click', () =>{
+  localStorage.removeItem('user')
+  window.location.pathname = "../../templates/login.html"
+})
