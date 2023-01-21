@@ -57,9 +57,7 @@ body{
 .input-error{
     border-color: rgba(255, 0, 0, 0.401);
 }
-.login-form__username{
 
-}
 .login-form__error-message{
     margin-top: 5px;
     font-size: 18px;
@@ -76,7 +74,7 @@ body{
 }
 .login-form__login-button:hover{
     background: #2ca2fd;
-    -webkit-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
-    -moz-box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
-    box-shadow: -1px 0px 98px -27px rgba(0, 0, 0, 0.45);
+    -webkit-box-shadow: -1px 0 98px -27px rgba(0, 0, 0, 0.45);
+    -moz-box-shadow: -1px 0 98px -27px rgba(0, 0, 0, 0.45);
+    box-shadow: -1px 0 98px -27px rgba(0, 0, 0, 0.45);
 }

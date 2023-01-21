@@ -26,8 +26,8 @@ class CompaniesPage {
   }
 
 
-  handleClick = () => {
-    document.querySelectorAll('.card').forEach(card => {
+  handleClick = (cards) => {
+    cards.forEach(card => {
       card.onclick= () => {
         let [company] = this.companyCards.filter((el) => el.uid === card.id )
         let detailedPage = new DetailedInfo(company,this.container)
@@ -71,7 +71,7 @@ class CompaniesPage {
   renderCards(cards = []){
     let cardsContainer = document.querySelector('.cards')
     cardsContainer.innerHTML = cards.reduce((html, card) => {return html + card.render()}, "")
-    this.handleClick()
+    this.handleClick(document.querySelectorAll('.card'))
     this.handleInputs()
   }
 }
