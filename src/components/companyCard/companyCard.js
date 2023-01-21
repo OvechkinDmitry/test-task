@@ -11,6 +11,8 @@ class CompanyCard{
         this.adress = this.companyData?.["full_address"]
         this.phone =  this.companyData?.["phone_number"]
         this.catchPhrase = this.companyData?.["catch_phrase"]
+        this.latitude = this.companyData?.latitude
+        this.longitude = this.companyData?.longitude
     }
     render = () => getCompanyCardTemplate(this.uid, this.logo, this.name, this.type, this.industry)
 }
