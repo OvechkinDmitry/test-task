@@ -3,30 +3,45 @@
     padding: 40px 30px 50px 30px;
     display: flex;
     flex-direction: column;
-    background: #0f76dc;
+    background: #ffffff;
     width: 100%;
     border-radius: 10px;
     gap: 20px;
+    color: #2E62D9;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.map__container{
+    width: 50%;
+    height: 700px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 .map{
     width: 100%;
+    height: 100%;
 }
-.map img{
-    opacity: 0.9;
-    width: 100%;
-}
+
 .go__back{
+    margin: 15px 0 15px 0;
+    border-radius: 10px;
     cursor: pointer;
     width: 100%;
     text-align: center;
+    background: #2E62D9;
     color: #fff;
-    background:rgba(0,0,0,0.0999);
     font-size: 50px;
     font-weight: 700;
     padding: 10px 0;
+    transition: background-color .2s ease;
+}
+.go__back:hover{
+    background: #0f76dc;
 }
 .detailed__title{
-    width: 100%;
+    width: max-content;
+    text-align: center;
     padding: 20px;
     flex-direction: column;
     border-radius: 10px;
@@ -35,18 +50,25 @@
     justify-content: center;
     font-size: 70px;
     font-weight: 500;
-    color: #fff;
     align-self: center;
 }
-.catch_phrase{
+.detailed_phrase{
+    text-align: center;
     margin-top: 10px;
-    font-size: 30px;
+    font-size: 22px;
 }
 .detailed__info{
     width: 100%;
     padding: 0 50px;
     display: flex;
+    align-items: center;
     align-self: flex-start;
+}
+.detailed__info:first-child{
+    justify-content: space-around;
+}
+.detailed__info:last-child{
+    justify-content: space-between;
 }
 .detailed__img{
     max-width: 40%;
@@ -63,23 +85,21 @@
     width: 100%;
 }
 .detailed__data{
-    font-size: 24px;
-    font-weight: 500;
-    color: white;
-    align-self: stretch;
-    min-height: 100%;
-}
-.detailed__data{
-    margin:auto;
+    padding: 100px 0 100px 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-self: stretch;
+    justify-content: space-around;
+    align-items: flex-end;
+    font-size: 25px;
+    font-weight: 600;
 }
-.detailed__data span{
-    display: inline-block;
+.detailed__data li{
+    max-width: 80%;
+    display: block;
+    width: fit-content;
+    padding: 20px 20px;
+    border-radius: 12px;
     color: #fff;
-    padding: 15px 15px;
-    text-align: center;
-    margin-right: 5px;
-    border-radius: 5px;
+    background: #2E62D9;
 }
