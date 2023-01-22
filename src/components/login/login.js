@@ -1,7 +1,15 @@
+import {getErrMessage} from "./message.js";
+import {getLoginPageTemplate} from "./template.js";
+
 class Login {
-  constructor(form, fields) {
-    this.form = form;
+  constructor(container,fields) {
+    this.container = container
     this.fields = fields;
+  }
+
+  init(){
+    this.container.innerHTML = getLoginPageTemplate()
+    this.form = document.querySelector(".login-form__body");
     this.validateOnSubmit();
     this.checkLocalStorage();
   }
@@ -9,58 +17,48 @@ class Login {
   validateOnSubmit() {
     this.form.addEventListener("submit", (e) => {
       e.preventDefault();
-      const fieldsResults = this.fields.map((field) => {
-        const input = document.querySelector(`#${field}`);
-        return this.validateFields(input);
-      });
+      const fieldsResults = this.fields.map( field =>
+          this.validateFields(document.querySelector(`#${field}`)))
       if (fieldsResults.every((f) => f)) {
-        localStorage.setItem("user", 1);
+        localStorage.setItem("user", "1");
         this.form.submit();
       }
     });
   }
 
-  checkLocalStorage = () =>
-    localStorage.getItem("user") ? this.form.submit() : false;
+  checkLocalStorage = () => localStorage.getItem("user") ? this.form.submit() : false;
 
   validateFields(field) {
-    if (field.value.trim() === "") {
-      return this.setStatus(
-        field,
-        `${field.previousElementSibling.innerText} поле не может быть пустым`,
-        "error"
-      );
-    } else {
-      if (field.type === "password") {
-        if (field.value.length < 5) {
-          return this.setStatus(
-            field,
-            `длина ${field.previousElementSibling.innerText} поля должна составялять более 5 знаков`,
-            "error"
-          );
-        } else return this.setStatus(field, null, "success");
-      } else return this.setStatus(field, null, "success");
-    }
+    let label = field.previousElementSibling.innerText
+    if (field.value.trim() === "")
+      return this.setStatus(field, getErrMessage("emptyField", label ), "error");
+    else
+      if (field.type === "password")
+        if (field.value.length < 5)
+          return this.setStatus(field, getErrMessage("smallPasword", label), "error");
+        else return this.setStatus(field, null, "success");
+      else return this.setStatus(field, null, "success");
   }
 
   setStatus(field, message, status) {
     const errorMessage = field.parentElement.querySelector(".error-message");
-    if (status == "error") {
-      errorMessage.innerText = message;
-      field.classList.add("input-error");
-      return false;
-    }
-    if (status === "success") {
-      if (errorMessage) errorMessage.innerText = "";
-      field.classList.remove("input-error");
-      return true;
+    switch (status){
+      case "error":{
+        errorMessage.innerText = message;
+        field.classList.add("input-error");
+        return false;
+      }
+      case "success":{
+        if (errorMessage)
+          errorMessage.innerText = "";
+        field.classList.remove("input-error");
+        return true;
+      }
     }
   }
 }
 
-const form = document.querySelector(".login-form__body");
-
-if (form) {
-  const fields = ["username", "password"];
-  const validator = new Login(form, fields);
-}
+const container = document.querySelector('body')
+const fields = ["username", "password"];
+const loginPage = new Login(container, fields);
+loginPage.init()
